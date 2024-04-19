@@ -24,7 +24,7 @@ class ClusteringApp(App):
         self.num_clusters = 0
 
         # Layout
-        layout = BoxLayout(orientation='vertical', padding=10)
+        layout = BoxLayout(orientation='vertical', padding=10, background_color=(1, 0, 0, 1))  # Red background
 
         # FileChooser
         self.file_chooser = FileChooserListView()
