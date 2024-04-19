@@ -16,6 +16,10 @@ To execute the program we first need to have a database, in this case one called
 
 pip install kivy["base"]
 
+pip install pandas
+
+pip install matplotlib
+
 * Clone the repository.
 
 `git clone https://github.com/Broznif/TERCERA-ENTREGA-COD-ESTEFANNY---CELESTE.git`
@@ -31,6 +35,10 @@ pip install kivy["base"]
 The menu will be displayed where you can access to choose which file (.csv only) to use to know the number of clusters.
 
 ## Program execution for console
+
+pip install pandas
+
+pip install matplotlib
 
 * Clone the repository.
 
