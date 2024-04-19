@@ -39,7 +39,6 @@ class ClusteringApp(App):
 
         # Input for number of clusters
         self.num_clusters_input = TextInput(hint_text="Enter number of clusters", multiline=False)
-        layout.add_widget(Label(text="Number of Clusters:"))
         layout.add_widget(self.num_clusters_input)
 
         # Button to start clustering
@@ -57,8 +56,8 @@ class ClusteringApp(App):
     def start_clustering(self, instance):
         try:
             self.num_clusters = int(self.num_clusters_input.text)
-            if self.num_clusters <= 0:
-                raise ValueError("Number of clusters must be a positive integer.")
+            if self.num_clusters <= 0 or self.num_clusters > 30:  # Max 30 clusters
+                raise ValueError("Number of clusters invalid --> Only <30.")
         except ValueError as e:
             self.show_error_popup("Invalid Input", str(e))
             return
@@ -84,7 +83,7 @@ class ClusteringApp(App):
             clusterer = Clusterer(self.num_clusters, len(data.columns))
             clustering_result = clusterer.cluster(data)
 
-            # Display clustering results
+            # Display clustering results in a separate popup window
             self.show_clustered_popup(data, clustering_result, self.num_clusters, 1)
 
     ''' Display clustering results in a popup window. '''
