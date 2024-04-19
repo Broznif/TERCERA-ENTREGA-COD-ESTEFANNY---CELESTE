@@ -44,7 +44,6 @@ The menu will be displayed where you can access to choose which file (.csv only)
 
 `python src\console\menu.py`
 
-
 ## Running unit tests
 Before creating a program, a series of unit tests are carried out to verify its correct operation. With this starting point we execute them, making sure to correctly install the libraries, files and commands.
 
