@@ -11,13 +11,14 @@ from kivy.uix.scrollview import ScrollView
 from kivy.uix.gridlayout import GridLayout
 from kivy.core.window import Window
 import pandas as pd
-from menu import Clusterer  # Importa la clase Clusterer desde tu módulo
+from menu import Clusterer  # Import the Clusterer class from your module
 
-# Redirigir la salida estándar y de error a la nada
+# Redirect standard output and error to nothing
 sys.stdout = open(os.devnull, 'w')
 sys.stderr = open(os.devnull, 'w')
 
 class ClusteringApp(App):
+    ''' Build the Kivy application interface. '''
     def build(self):
         self.file_path = ""
         self.num_clusters = 0
@@ -44,9 +45,11 @@ class ClusteringApp(App):
 
         return layout
 
+    ''' Callback function when a file is selected using the FileChooser. '''
     def selected(self, filechooser, file_path, *args):
         self.file_path = file_path[0] if file_path else ""
 
+    ''' Callback function to start the clustering process. '''
     def start_clustering(self, instance):
         try:
             self.num_clusters = int(self.num_clusters_input.text)
@@ -74,9 +77,9 @@ class ClusteringApp(App):
             # Display clustering results
             self.show_clustered_popup(data, clustering_result, self.num_clusters, 1)
 
+    ''' Display clustering results in a popup window. '''
     def show_clustered_popup(self, data, clustering, num_clusters, decimals):
-        # Crear una nueva ventana emergente
-        popup = Popup(title="Resultados del Agrupamiento", size_hint=(0.9, 0.9))
+        popup = Popup(title="Clustering Results", size_hint=(0.9, 0.9))
 
         clusters_layout = GridLayout(cols=3, spacing=10, size_hint_y=None)
         clusters_layout.bind(minimum_height=clusters_layout.setter('height'))
@@ -89,7 +92,6 @@ class ClusteringApp(App):
                 clusters[cluster_id] = []
             clusters[cluster_id].append(row)
 
-        # Crear etiquetas para cada cluster
         for k, rows in clusters.items():
             cluster_label = Label(text=f"Cluster {k}:", font_size=16, bold=True)
             clusters_layout.add_widget(cluster_label)
@@ -97,7 +99,6 @@ class ClusteringApp(App):
             cluster_content = GridLayout(cols=1, spacing=5, size_hint_y=None)
             cluster_content.bind(minimum_height=cluster_content.setter('height'))
 
-            # Crear etiquetas para cada fila en el cluster
             for row in rows:
                 row_text = " ".join([f"{value:.{decimals}f}" if isinstance(value, (int, float)) else str(value) for value in row])
                 row_label = Label(text=row_text)
@@ -111,6 +112,7 @@ class ClusteringApp(App):
         popup.add_widget(scroll_view)
         popup.open()
 
+    ''' Display error messages in a popup window. '''
     def show_error_popup(self, title, message):
         popup = Popup(title=title, content=Label(text=message), size_hint=(None, None), size=(400, 200))
         popup.open()
