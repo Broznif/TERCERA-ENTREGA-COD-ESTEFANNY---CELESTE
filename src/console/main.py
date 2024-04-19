@@ -33,6 +33,10 @@ class ClusteringApp(App):
         layout.add_widget(Label(text="Select CSV File:"))
         layout.add_widget(self.file_chooser)
 
+        # Message about file size limit
+        file_size_limit_label = Label(text="MAX FILE SIZE PERMITTED: 60KB", color=(1, 0, 0, 1))
+        layout.add_widget(file_size_limit_label)
+
         # Input for number of clusters
         self.num_clusters_input = TextInput(hint_text="Enter number of clusters", multiline=False)
         layout.add_widget(Label(text="Number of Clusters:"))
@@ -65,8 +69,8 @@ class ClusteringApp(App):
 
         # Check file size
         file_size_kb = os.path.getsize(self.file_path) / 1024
-        if file_size_kb > 70:
-            self.show_error_popup("Error", "File size exceeds the limit (70KB). Please select a smaller file.")
+        if file_size_kb > 60:
+            self.show_error_popup("Error", "File size exceeds the limit (60KB). Please select a smaller file.")
             return
 
         # Perform clustering
