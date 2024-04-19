@@ -63,6 +63,12 @@ class ClusteringApp(App):
             self.show_error_popup("Error", "Please select a CSV file.")
             return
 
+        # Check file size
+        file_size_kb = os.path.getsize(self.file_path) / 1024
+        if file_size_kb > 70:
+            self.show_error_popup("Error", "File size exceeds the limit (70KB). Please select a smaller file.")
+            return
+
         # Perform clustering
         if self.file_path:
             try:
