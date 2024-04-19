@@ -1,0 +1,28 @@
+<ClustererWindow>:
+    BoxLayout:
+        orientation: "vertical"
+        padding: 20
+
+        Label:
+            text: "Path to CSV file:"
+        TextInput:
+            id: file_path_input
+            multiline: False
+            size_hint_y: None
+            height: "30dp"
+
+        Label:
+            text: "Number of clusters:"
+        TextInput:
+            id: num_clusters_input
+            multiline: False
+            size_hint_y: None
+            height: "30dp"
+
+        Button:
+            text: "Cluster Data"
+            on_press: root.cluster_data()
+
+        Label:
+            id: result_label
+            text: ""
